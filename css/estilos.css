@@ -290,6 +290,15 @@ body{
     :root{
         --boton-padding: 18px 40px
     }
+    .hero{
+        height: 50vh;
+        background-image: var(--background), url('../Img/fondo.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+        position: relative;
+    }
 
     .nav{
         justify-content: space-around;
@@ -373,6 +382,16 @@ body{
     :root{
         --boton-padding: 18px 35px;
     }
+    
+    .hero{
+        height: 50vh;
+        background-image: var(--background), url('../Img/fondo.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+        position: relative;
+    }
 
     .subtitle{
         font-size: 2rem;
@@ -437,7 +456,3 @@ body{
     }
 
 }
-
-
-
-
