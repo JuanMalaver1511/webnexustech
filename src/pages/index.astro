@@ -1,0 +1,52 @@
+---
+import Layout from "../layouts/Layout.astro";
+import CardView from "../utils/card/CardView.astro";
+import CardOther from "../utils/card/CardOther.astro";
+import data from "../../public/data/cardInfo.json";
+---
+
+<Layout title="NexusTech">
+	<main class="h-auto flex items-center flex-col md:mt-9 mt-16 min-w-96">
+		<CardView
+			title="NexusTech"
+			content='"Navegando juntos hacia un futuro digital sin límites."'
+		/>
+		{
+			data.sections.map((section) => (
+				<CardOther title={section.title} content={section.content} />
+			))
+		}
+	</main>
+</Layout>
+
+<style>
+	@media (max-width: 1020px) {
+		main {
+			margin-top: 80px;
+		}
+	}
+</style>
+
+<script>
+	const originalTitle = 'NexusTech';
+	const awayTitle = '¡Vuelve pronto a NexusTech!';
+	const originalFavicon = './img/favicon.png';
+	const awayFavicon = './img/linda.png';
+
+	function changeFavicon(src: string) {
+            const favicon = document.getElementById('favicon');
+            if (favicon instanceof HTMLLinkElement) {
+                favicon.setAttribute('href', src);
+            }
+        }
+
+	window.addEventListener('blur', function() {
+		document.title = awayTitle;
+		changeFavicon(awayFavicon);
+	});
+
+	window.addEventListener('focus', function() {
+		document.title = originalTitle;
+		changeFavicon(originalFavicon);
+	});
+</script>
