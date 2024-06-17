@@ -1,0 +1,103 @@
+---
+import Titles from "../titles/Titles.astro";
+interface Props {
+    title: string;
+    content: string;
+}
+
+const { content, title } = Astro.props;
+---
+<section id="page-container" class="flex w-[95%] rounded-xl bg-blur_color_dark flex-col md:flex-row h-auto justify-between items-center p-6 shadow-lg shadow-black/50 card-container opacity-0">
+    <div class="flex flex-col items-start md:w-1/2 ml-7">
+        <div class="flex items-baseline flex-wrap">
+            <h1 class="font-bold md:text-[70px] text-[40px] text-text_color_hover mr-2">
+                Bienvenidos a
+            </h1>
+            <span class="md:text-[60px] text-[40px] text-text_color_hover">
+                <Titles title={title} />
+            </span>
+        </div>
+
+        <p class="text-[20px] md:text-xl text-text_color_hover mt-4">
+            {content}
+        </p>
+
+        <div class="mt-6 flex">
+            <button
+            class="text-text_color rounded-md hover:bg-secundary hover:text-text_color_hover border-2 hover:border-secundary px-6 py-1 transition-colors"
+            >Contactanos</button
+        >
+        </div>
+    </div>
+
+    <div class="hidden md:flex md:mt-0 md:ml-6 md:w-1/2 items-center justify-center">
+        <div class="logo" id="logo">
+            <img src="/img/favicon.png" loading="lazy" alt="Logo" id="logo-image">
+        </div>
+    </div>
+</section>
+<style>
+    .card-container {
+        perspective: 1000px;
+        transition: transform 0.5s;
+    }
+
+    .card-container:hover {
+        transform: rotateY(10deg);
+    }
+
+    .logo {
+        position: relative;
+        width: 80%;
+        height: 80%;
+        transition: transform 1s linear, opacity 0.3s linear;
+    }
+
+    @media (max-width: 950px) {
+        .logo {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .fade-in {
+        animation: fadeIn 1s ease-out forwards;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const pageContainer = document.getElementById('page-container');
+        if (pageContainer) {
+            pageContainer.classList.add('fade-in');
+        }
+
+        const card = document.getElementById('card');
+
+        if (card) {
+            card.addEventListener('mousemove', function(e) {
+                const rect = card.getBoundingClientRect();
+                const xAxis = (e.clientX - rect.left - rect.width / 2) / 200;
+                const yAxis = (rect.top + rect.height / 2 - e.clientY) / 30;
+                card.style.transform = `perspective(800px) rotateX(${yAxis}deg) rotateY(${xAxis}deg)`;
+            });
+
+            card.addEventListener('mouseleave', function() {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+            });
+        } else {
+            console.error("El elemento con ID 'card' no fue encontrado.");
+        }
+    });
+</script>

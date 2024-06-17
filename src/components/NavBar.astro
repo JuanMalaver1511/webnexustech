@@ -1,0 +1,70 @@
+---
+import ItemNavBar from "../utils/buttons/ItemNavBar.astro"
+import logo from "../../public/img/logo.webp";
+---
+
+<div
+    class="fixed flex w-[95%] md:rounded-full rounded-xl bg-blur_color_dark top-2 flex-col overflow-hidden py-4 px-2 md:mx-auto md:flex-row md:items-center z-20 min-w-96"
+>
+    <a
+        href="#"
+        class="flex items-center whitespace-nowrap text-2xl font-black md:mx-5 mx-5"
+    >
+        <span class="">
+            <img class="w-56" src={logo.src} alt="" />
+        </span>
+    </a>
+    <input type="checkbox" class="peer hidden" id="navbar-open" />
+    <label
+        class="absolute top-5 right-7 cursor-pointer md:hidden"
+        for="navbar-open"
+    >
+        <span class="sr-only">Toggle Navigation</span>
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-text_color"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+        >
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+    </label>
+    <nav
+        aria-label="Header Navigation"
+        class="peer-checked:mt-8 peer-checked:max-h-56 flex max-h-0 w-full flex-col items-center justify-between overflow-hidden transition-all md:ml-24 md:max-h-full md:flex-row md:items-start md:mx-5"
+    >
+        <ul
+            class="flex flex-col items-center space-y-2 md:ml-auto md:flex-row md:space-y-0"
+        >
+            <li class="text-navBarText hover:text-blue-600">
+                <button
+                    class="text-text_color rounded-md hover:bg-secundary hover:text-text_color_hover border-2 hover:border-secundary px-6 py-1 transition-colors"
+                    >Contactanos</button
+                >
+            </li>
+            <ItemNavBar title="Sobre Nosotros" href="#" />
+            <ItemNavBar title="Nuestro Equipo" href="#" />
+        </ul>
+    </nav>
+</div>
+<script>
+    const checkbox = document.getElementById('navbar-open');
+
+    // Función para desactivar el checkbox cuando el tamaño de la pantalla sea menor que el tamaño md
+    function handleResize() {
+        if (window.innerWidth > 768) { // 768px es el tamaño md
+            if (checkbox instanceof HTMLInputElement) {
+                checkbox.checked = false;
+            }
+        }
+    }
+
+    // Ejecutar la función al cargar la página y al cambiar el tamaño de la ventana
+    window.addEventListener('load', handleResize);
+    window.addEventListener('resize', handleResize);
+</script>
